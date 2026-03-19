@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Project Intake Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface2: #f2f2f0;
+    --border: #e0e0dc;
+    --accent: #2563eb;
+    --accent2: #1d4ed8;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --success: #16a34a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 36px;
+  }
+
+  .header-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 500px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    margin-bottom: 40px;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+  .section:nth-child(6) { animation-delay: 0.35s; }
+  .section:nth-child(7) { animation-delay: 0.4s; }
+  .section:nth-child(8) { animation-delay: 0.45s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .section-num {
+    width: 26px; height: 26px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .card:focus-within {
+    border-color: #93c5fd;
+  }
+
+  /* Form elements */
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 7px;
+  }
+
+  label .required {
+    color: #ef4444;
+    margin-left: 3px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    background: #fff;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 95px;
+    line-height: 1.55;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+
+  select option {
+    background: white;
+    color: var(--text);
+  }
+
+  /* Color swatches */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 8px;
+  }
+
+  .color-option {
+    position: relative;
+  }
+
+  .color-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+
+  .color-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 6px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .color-dot {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.08);
+  }
+
+  .color-option input:checked + label {
+    border-color: var(--accent);
+    background: #eff6ff;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+
+  .color-option label:hover {
+    border-color: #93c5fd;
+  }
+
+  /* Vibe chips */
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .chip-option { position: relative; }
+
+  .chip-option input[type="checkbox"] {
+    position: absolute; opacity: 0; width: 0; height: 0;
+  }
+
+  .chip-option label {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 15px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    color: #374151;
+    transition: all 0.2s;
+    margin: 0;
+  }
+
+  .chip-option input:checked + label {
+    background: #eff6ff;
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .chip-option label:hover { border-color: #93c5fd; }
+
+  /* Two col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Radio group */
+  .radio-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .radio-opt { position: relative; }
+
+  .radio-opt input[type="radio"] {
+    position: absolute; opacity: 0; width: 0; height: 0;
+  }
+
+  .radio-opt label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #374151;
+    transition: all 0.2s;
+    margin: 0;
+  }
+
+  .radio-opt input:checked + label {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #eff6ff;
+    font-weight: 500;
+  }
+
+  .radio-opt label:hover { border-color: #93c5fd; }
+
+  /* File upload */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface2);
+    position: relative;
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .upload-zone input[type="file"]:focus {
+    box-shadow: none;
+    border: none;
+  }
+
+  .upload-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .upload-text {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .upload-hint {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .file-list {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .file-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1d4ed8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Submit */
+  .submit-wrap {
+    animation: fadeUp 0.5s 0.5s ease both;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.25);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  /* Success state */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--surface);
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    margin-top: 24px;
+  }
+
+  .success-icon {
+    width: 60px; height: 60px;
+    background: #dcfce7;
+    border: 2px solid #86efac;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 26px;
+    color: var(--success);
+  }
+
+  .success-msg h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #15803d;
+  }
+
+  .success-msg p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0 18px;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-label">Website Project</div>
+    <h1>Client Intake Form</h1>
+    <p class="subtitle">Fill this out so we can get started on your website. Takes about 5 minutes — the more detail the better.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span id="pct">0% complete</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <form id="intakeForm" action="https://formspree.io/f/xdawprwj" method="POST">
+
+    <!-- 1. Business Info -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Business Info</div>
+      </div>
+      <div class="card">
+        <div class="two-col">
+          <div class="field">
+            <label>Business Name <span class="required">*</span></label>
+            <input type="text" name="business_name" placeholder="e.g. Apex Plumbing Co." required>
+          </div>
+          <div class="field">
+            <label>Industry / Type</label>
+            <input type="text" name="industry" placeholder="e.g. Plumbing, Salon, Restaurant">
+          </div>
+        </div>
+        <div class="field">
+          <label>Tagline or Slogan <span class="required">*</span></label>
+          <input type="text" name="tagline" placeholder="e.g. 'Quality work, every time'" required>
+        </div>
+        <div class="field">
+          <label>Short Business Description</label>
+          <textarea name="description" placeholder="Describe what your business does in a few sentences..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Contact Info -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Contact Details</div>
+      </div>
+      <div class="card">
+        <div class="two-col">
+          <div class="field">
+            <label>Your Name <span class="required">*</span></label>
+            <input type="text" name="contact_name" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <label>Email Address <span class="required">*</span></label>
+            <input type="email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="(555) 000-0000">
+          </div>
+          <div class="field">
+            <label>Business Location / City</label>
+            <input type="text" name="location" placeholder="e.g. Chicago, IL">
+          </div>
+        </div>
+        <div class="field">
+          <label>Business Address (if you want it on the site)</label>
+          <input type="text" name="address" placeholder="Street address, City, State, ZIP">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Services -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Services & Offerings</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>List Your Main Services <span class="required">*</span></label>
+          <textarea name="services" placeholder="e.g.&#10;- Pipe repair & installation&#10;- Drain cleaning&#10;- Emergency call-outs&#10;- Water heater replacement" style="min-height:120px;" required></textarea>
+        </div>
+        <div class="field">
+          <label>Do you want pricing displayed on the site?</label>
+          <div class="radio-group">
+            <div class="radio-opt">
+              <input type="radio" name="show_pricing" id="price_yes" value="yes">
+              <label for="price_yes">Yes</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="show_pricing" id="price_no" value="no" checked>
+              <label for="price_no">No — contact for quote</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="show_pricing" id="price_some" value="some">
+              <label for="price_some">Some services only</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Service Area (if applicable)</label>
+          <input type="text" name="service_area" placeholder="e.g. Greater Chicago area, all of Cook County">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Design & Colors -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Design & Colors</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>Pick your preferred color palette (select all that apply)</label>
+          <div class="color-grid">
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_blue" value="Blue & White">
+              <label for="c_blue"><div class="color-dot" style="background:#2563eb"></div>Blue & White</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_black" value="Black & Gold">
+              <label for="c_black"><div class="color-dot" style="background:linear-gradient(135deg,#111,#c9a84c)"></div>Black & Gold</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_green" value="Green & Natural">
+              <label for="c_green"><div class="color-dot" style="background:#16a34a"></div>Green & Natural</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_red" value="Red & Bold">
+              <label for="c_red"><div class="color-dot" style="background:#dc2626"></div>Red & Bold</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_neutral" value="Neutral & Minimal">
+              <label for="c_neutral"><div class="color-dot" style="background:#d1d5db"></div>Neutral & Minimal</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_purple" value="Purple & Modern">
+              <label for="c_purple"><div class="color-dot" style="background:#7c3aed"></div>Purple & Modern</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_orange" value="Orange & Energetic">
+              <label for="c_orange"><div class="color-dot" style="background:#ea580c"></div>Orange & Energetic</label>
+            </div>
+            <div class="color-option">
+              <input type="checkbox" name="colors" id="c_custom" value="Custom — I'll describe">
+              <label for="c_custom"><div class="color-dot" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red)"></div>Custom</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Custom colors or hex codes (optional)</label>
+          <input type="text" name="custom_colors" placeholder="e.g. Navy blue #003366, bright orange #FF6600">
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>What vibe should the website have? (select all that apply)</label>
+          <div class="chip-grid">
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v1" value="Professional"><label for="v1">Professional</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v2" value="Friendly & Approachable"><label for="v2">Friendly & Approachable</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v3" value="Luxury / High-end"><label for="v3">Luxury / High-end</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v4" value="Bold & Eye-catching"><label for="v4">Bold & Eye-catching</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v5" value="Clean & Minimal"><label for="v5">Clean & Minimal</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v6" value="Playful & Fun"><label for="v6">Playful & Fun</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v7" value="Trustworthy & Local"><label for="v7">Trustworthy & Local</label></div>
+            <div class="chip-option"><input type="checkbox" name="vibe" id="v8" value="Modern & Tech-forward"><label for="v8">Modern & Tech-forward</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Logo & Branding -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Logo & Branding</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>Do you have a logo? <span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-opt">
+              <input type="radio" name="has_logo" id="logo_yes" value="yes" required>
+              <label for="logo_yes">✅ Yes, I have one</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="has_logo" id="logo_no" value="no">
+              <label for="logo_no">❌ No logo yet</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="has_logo" id="logo_need" value="need_one">
+              <label for="logo_need">🎨 Need one made</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Any existing brand materials or guidelines?</label>
+          <textarea name="brand_notes" placeholder="Fonts you use, brand colors, any visual rules..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Inspiration & References -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Inspiration & References</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>Websites you like (paste URLs)</label>
+          <textarea name="inspiration" placeholder="e.g.&#10;https://example1.com — I love the layout&#10;https://example2.com — I like the colors"></textarea>
+        </div>
+        <div class="field">
+          <label>Competitor websites (so we can make sure yours stands out)</label>
+          <textarea name="competitors" placeholder="Any local or national competitors whose sites you've seen..."></textarea>
+        </div>
+        <div class="field">
+          <label>Anything you definitely DON'T want?</label>
+          <textarea name="dont_want" placeholder="e.g. No dark backgrounds, avoid stock photo people, no animations..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Social & Links -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">Social Media & Links</div>
+      </div>
+      <div class="card">
+        <div class="two-col">
+          <div class="field">
+            <label>Facebook URL</label>
+            <input type="url" name="facebook" placeholder="https://facebook.com/yourpage">
+          </div>
+          <div class="field">
+            <label>Instagram URL</label>
+            <input type="url" name="instagram" placeholder="https://instagram.com/yourhandle">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>TikTok URL</label>
+            <input type="url" name="tiktok" placeholder="https://tiktok.com/@yourhandle">
+          </div>
+          <div class="field">
+            <label>Google Business URL</label>
+            <input type="url" name="google" placeholder="https://g.page/yourbusiness">
+          </div>
+        </div>
+        <div class="field">
+          <label>Yelp / Other review page</label>
+          <input type="url" name="other_social" placeholder="https://yelp.com/...">
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Do you want a booking / contact form on the site?</label>
+          <div class="radio-group">
+            <div class="radio-opt">
+              <input type="radio" name="contact_form" id="cf_yes" value="yes">
+              <label for="cf_yes">Yes please</label>
+            </div>
+            <div class="radio-opt">
+              <input type="radio" name="contact_form" id="cf_no" value="no">
+              <label for="cf_no">No thanks</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Any other notes or special requests?</label>
+          <textarea name="other_notes" placeholder="Anything else we should know before building your site..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Images & Files -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">Images & Files</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>Logo File <span style="color:var(--muted);font-weight:400">(PNG, SVG, or PDF preferred)</span></label>
+          <div class="upload-zone" id="logoZone">
+            <input type="file" name="logo_file" id="logoUpload" accept=".png,.jpg,.jpeg,.svg,.pdf,.ai,.eps" onchange="handleFiles('logoUpload','logoList')">
+            <span class="upload-icon">🖼️</span>
+            <div class="upload-text">Click to upload your logo</div>
+            <div class="upload-hint">PNG, SVG, PDF, AI, EPS — up to 20MB</div>
+          </div>
+          <div class="file-list" id="logoList"></div>
+        </div>
+
+        <div class="field">
+          <label>Business Photos <span style="color:var(--muted);font-weight:400">(your team, shop, work examples, etc.)</span></label>
+          <div class="upload-zone" id="photosZone">
+            <input type="file" name="photos[]" id="photosUpload" accept="image/*" multiple onchange="handleFiles('photosUpload','photosList')">
+            <span class="upload-icon">📸</span>
+            <div class="upload-text">Click to upload photos</div>
+            <div class="upload-hint">JPG, PNG, WEBP — multiple files OK</div>
+          </div>
+          <div class="file-list" id="photosList"></div>
+        </div>
+
+        <div class="field">
+          <label>Any other files <span style="color:var(--muted);font-weight:400">(menus, price lists, brochures, etc.)</span></label>
+          <div class="upload-zone" id="otherZone">
+            <input type="file" name="other_files[]" id="otherUpload" multiple onchange="handleFiles('otherUpload','otherList')">
+            <span class="upload-icon">📎</span>
+            <div class="upload-text">Click to upload other files</div>
+            <div class="upload-hint">PDF, DOCX, XLSX — any format welcome</div>
+          </div>
+          <div class="file-list" id="otherList"></div>
+        </div>
+
+        <div class="field">
+          <label>Don't have files to upload? Share a Google Drive or Dropbox link instead</label>
+          <input type="url" name="file_link" placeholder="https://drive.google.com/...">
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit">Submit My Project Info →</button>
+    </div>
+
+  </form>
+
+  <!-- Success -->
+  <div class="success-msg" id="successMsg">
+    <div class="success-icon">✓</div>
+    <h3>You're all set!</h3>
+    <p>Thanks for submitting your info. We'll review everything and be in touch within 24 hours with next steps.</p>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('intakeForm');
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('pct');
+
+  const fields = form.querySelectorAll('input:not([type="file"]), textarea, select');
+
+  function updateProgress() {
+    let filled = 0;
+    fields.forEach(f => {
+      if (f.type === 'checkbox' || f.type === 'radio') {
+        if (f.checked) filled++;
+      } else if (f.value.trim()) {
+        filled++;
+      }
+    });
+    const p = Math.round((filled / fields.length) * 100);
+    fill.style.width = p + '%';
+    pct.textContent = p + '% complete';
+  }
+
+  fields.forEach(f => f.addEventListener('input', updateProgress));
+  fields.forEach(f => f.addEventListener('change', updateProgress));
+
+  function handleFiles(inputId, listId) {
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+    list.innerHTML = '';
+    Array.from(input.files).forEach(file => {
+      const tag = document.createElement('div');
+      tag.className = 'file-tag';
+      tag.textContent = '📄 ' + file.name;
+      list.appendChild(tag);
+    });
+  }
+
+  // Drag over highlight
+  document.querySelectorAll('.upload-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', () => zone.classList.remove('drag-over'));
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Network error — try again';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
